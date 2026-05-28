@@ -119,6 +119,13 @@
             layers = <0>;
         };
 
+        printscreen {
+            bindings = <&kp PSCRN>;
+            key-positions = <23 25>;
+            layers = <0>;
+        };
+
+
      };
 
 };
