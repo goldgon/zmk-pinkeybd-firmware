@@ -1,0 +1,211 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include "keycode_japanese.h"
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
+
+&msc {
+    acceleration-exponent = <0>;      // 0
+    time-to-max-speed-ms = <0>;       // 300
+    delay-ms = <0>;                   // 0
+};
+
+&mmv {
+    time-to-max-speed-ms = <0>;
+    acceleration-exponent = <0>;
+    trigger-period-ms = <10>;
+    delay-ms = <0>;
+};
+
+&mt { 
+    flavor = "balanced"; 
+    tapping-term-ms = <200>;
+    quick-tap-ms = <150>; 
+};
+
+&lt {
+    flavor = "balanced";
+    tapping-term-ms = <200>; 
+    quick-tap-ms = <150>; 
+};
+
+//    0  1  2  3  4  5              6  7  8  9  10 
+//    11 12 13 14 15 16             17 18 19 20 21
+//    22 23 24 25 26 27          37 28 29 30 31 32 
+//    33       34 35 36             38 39 40 	41
+
+
+
+
+/ {
+    combos { compatible = "zmk,combos"; 
+
+        lang {
+            bindings = <&kp GRAVE>;
+            key-positions = <1 3>;
+            layers = <0>;
+            timeout-ms = <200>;
+        };
+
+        fopen {
+            bindings = <&kp LG(N2)>;
+            key-positions = <6 10>;
+            layers = <0>;
+            timeout-ms = <200>;
+        };
+
+       bootloader_R {
+            bindings = <&bootloader>;
+            key-positions = <6 10 28 32>;
+            timeout-ms = <200>;
+        };
+
+       bootloader_L {
+            bindings = <&bootloader>;
+            key-positions = <0 4 22 26>;
+            timeout-ms = <200>;
+        };
+
+        eq {
+            bindings = <&bt BT_CLR_ALL>;
+            key-positions = <0 11 22>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+
+        bt0 {
+            bindings = <&bt BT_SEL 0>;
+            key-positions = <6 17 28>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+
+     };
+
+};
+
+
+/ {
+    behaviors {
+        rot_kp: sensor_rotate_kp {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+
+        default_layer {
+            bindings = <
+                &kp ESCAPE        &lt 5 Q        &kp E      &kp U         &kp P      &bootloader                            &kp D        &lt 7 T         &lt 6 R       &lt 5 W       &mkp MB1
+
+                &mt LSHIFT TAB      &lt 3 O        &lt 2 A      &lt 1 I &mt LCTRL F  &kp A                    &mt RCTRL H  &lt 1 Y         &lt 2 K       &lt 3 S       &mt LEFT_SHIFT B
+
+               &lt 4 MINUS    &mt LGUI X   &mt LALT C &mt LSHIFT V  &mt LCTRL L       &kp LC(RG(LEFT))          &mt RCTRL N &mt RSHIFT M  &mt RALT G  &mt RGUI J  &lt 4 Z
+
+                &kp LSHIFT                             &lt 1 LANGUAGE_1 &kp SPACE &kp LEFT_WIN       &kp LG(RC(RIGHT))      &bootloader   &kp ENTER    &lt 3 LANGUAGE_2      &kp TAB
+
+            >;
+            sensor-bindings = <&rot_kp PG_DN PG_UP>;
+        };
+    
+            // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // |    /           |       ,       |       END     |     （        |      ”        |    PAUSE_BREAK|                  |            |      （       |       ）     |        ↑      |        [      |      ]      |
+            // |    HOME        |       C_SAVE  |       END     |       ）      |       U       |    SCROLLLOCK |                  |            |   Backspace   |       ←      |        ↓      |        →      |     DEL     |
+            // |    UNDO        |       CUT     |       COPY    |       PASTE   |       Q       |    TAB        |                  |   PSCRN    |    ' / "      |    = / +     |    \ / |      |    ` / ~      |    INS      |
+            // |    L_SHIFT     |               |               |       none    |    SPACE      |    LALT       |                  |   RSHIFT   |   ENTER       |       FUN_L  |               |               |    RCTRL    |
+            // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Lower_layer_1 {
+            bindings = <
+                &kp 0x38     &none      &kp UP     &none       &none   &kp PAUSE_BREAK                 &kp TAB          &kp UP          &kp N8        &kp N9         &mkp MB2
+                &kp JP_SEMI  &kp LEFT   &kp GRAVE  &kp GRAVE   &kp MINUS               &kp SCROLLLOCK                 &kp BACKSPACE  &kp SPACE       &kp TAB       &kp ENTER      &kp COMMA
+                &kp JP_COLON &none &none &none &none               &kp TAB                        &kp DELETE  &kp N1 &kp N2 &kp N3 &mt LCTRL PERIOD
+                &kp LSHIFT                              &none           &kp SPACE           &kp LALT            &kp PSCRN   &kp RSHIFT        &kp ENTER     &mo 4                &kp RCTRL
+            >;  
+        };
+
+            // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // |    /           |       ,        |       END     |       {       |       ’      |    ESC        |                  |            |      L      |      R         |    PG_UP      |     {       |      }      |
+            // |    HOME        |       C_SAVE   |       END     |       }       |       U      |    LCTRL      |                  |            |  Backspace  |    HOME        |    PG_DN      |    END      |    DEL      |
+            // |    UNDO        |       CUT      |       COPY    |       PASTE   |       Q      |    TAB        |                  |      F     |    ' / "    |    = / +       |    \ / |      |    ` / ~    |    INS      |
+            // |    L_SHIFT     |                |               |       BT_L    |      SPACE   |    LALT       |                  |   ENTER    |    none     |   R_SHIFT      |               |             |   R_SHIFT   |
+            // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Lower2_layer_2 {
+            bindings = <
+               &none        &kp JP_LT      &kp JP_EQUAL   &kp JP_RT  &none    &kp ESC                             &none          &kp JP_PLUS     &none        &kp JP_SLASH  &mkp MB3
+                &none        &kp JP_LPAR    &kp JP_AT      &kp JP_RPAR   &kp MINUS               &kp LCTRL                           &kp JP_QMARK   &kp ENTER  &kp DOUBLE_QUOTES &kp LS(0x87)  &kp LS(0x1e)
+                &none        &kp JP_LBRC    &none          &kp JP_RBRC   &none               &kp TAB                             &kp DELETE          &none           &none         &none         &none
+                &kp LSHIFT                             &mo 5             &kp SPACE           &kp LALT                &kp PSCRN   &kp RSHIFT      &kp ENTER    &none                          &kp RSHIFT
+            >;
+        };
+
+            // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // |        1       |      2        |       3       |       4       |       5       |    ESC        |               |            |      6       |      7        |       8       |       9       |       0       |
+            // |        !       |      @        |       #       |       $       |       %       |    none       |               |            |      ^       |      &        |       *       |       (       |       )       | 
+            // |        F1      |     F2        |     F3        |       F4      |       F5      |    TAB        |               |     F11    |    ' / "     |    = / +      |    \ / |      |    ` / ~      |       INS     |
+            // |    L_SHIFT     |               |               | En / LOWER    |    Space      |    LSIHT      |               |   R_SHIFT  |      ENTER   |     none      |               |               |       R_SHIFT |
+            // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Num_layer_3 {
+            bindings = <
+                &none        &kp HOME   &kp UP     &kp PAGE_UP      &none      &kp ESC                         &kp TAB          &kp N7          &kp N8        &kp N9         &mkp MB3
+                &none        &kp LEFT   &kp DOWN   &kp RIGHT        &none  &none                          &kp BACKSPACE  &kp N4          &mt RGUI N5        &kp N6         &kp ENTER
+                &none        &kp END    &none      &kp PAGE_DOWN    &none      &kp TAB                        &kp N0         &kp N1          &kp N2        &kp N3         &mt LCTRL PERIOD
+                &mo LSHIFT                             &mo 5     &kp SPACE   &kp LSHIFT          &kp F11   &kp RSHIFT   &kp ENTER   &none                  &kp RSHIFT
+            >;
+        };
+            // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // |     F1      |     F2     |     F3     |     F4     |    F5      |    none    |                |            |    F6      |    F7      |    F8      |    F9       |     F10     |
+            // |     F11     |     F12    |     F13    |     F14    |    F15     |    none    |                |   none     |    F16     |    F17     |    F18     |    F19      |     F20     |
+            // |     none    |    none    |    none    |    none    |   none     |    none    |                |   none     |    none    |    none    |    none    |    none     |     none    |
+            // |     L_SHIFT |    none    |    none    |    none    |   none     |    none    |                |   none     |    none    |    none    |    none    |    none     |     R_SHIFT |
+            // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Func_layer_4 {
+            bindings = <
+                &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &none                        &kp F6       &kp F7       &kp F8     &kp F9      &kp F10
+               &none   &none   &kp JP_AT   &none   &none     &none                        &none   &none   &none   &kp JP_HASH   &none
+                &none        &none        &none        &none         &none       &none                        &none        &none        &none      &none       &none
+                &kp LSHIFT                             &none         &none       &none             &none      &none        &none        &none                  &kp RSHIFT
+            >;
+        };
+            // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // |    none    |    none    |    none    |    none    |   none     |    none    |                  |            |    none    |    none    |    none    |   none     |    none    |
+            // |  BT_SEL 0  |  BT_SEL 1  |  BT_SEL 2  |  BT_SEL 3  |   none     |    none    |                  |            |    none    |    none    |    none    |   BT_CLR   | BT_CLR_ALL |
+            // |    none    |    none    |    none    |    none    |   none     |    none    |                  |    none    |    none    |   BT_PRV   |    none    |   BT_NXT   |    none    |
+            // |    none    |    none    |    none    |    none    |   none     |    none    |                  |    none    |    none    |    none    |    none    |   none     |    none    |
+            // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Bt_layer_5 {
+            bindings = <
+                &kp F1  &msc SCRL_RIGHT   &mmv MOVE_Y(-1500)     &msc SCRL_UP  &kp F5 &bt BT_SEL 5                  &kp F6  &kp F7  &kp F8  &kp F9  &mkp MB1
+                &none      &mmv MOVE_X(-1500) &mmv MOVE_Y(1500)    &mmv MOVE_X(1500)    &none        &none                         &none   &none   &none   &kp JP_HASH   &none
+                &trans  &msc SCRL_LEFT   &trans           &msc SCRL_DOWN  &trans         &none                         &none        &none        &none        &none        &none
+                &none                                  &none         &none        &none             &none       &none        &none        &none                     &none
+            >;
+        };
+
+       6 {
+            bindings = <
+                &kp F1  &msc SCRL_RIGHT   &mmv MOVE_Y(-900)     &msc SCRL_UP  &kp F5 &bt BT_SEL 5                  &kp F6  &kp F7  &kp F8  &kp F9  &mkp MB1
+                &none      &mmv MOVE_X(-900) &mmv MOVE_Y(900)    &mmv MOVE_X(900)    &none        &none                         &none   &none   &none   &kp JP_HASH   &none
+                &trans  &msc SCRL_LEFT   &trans           &msc SCRL_DOWN  &trans       &none                         &none        &none        &none        &none        &none
+                &none                                  &none         &none        &none             &none       &none        &none        &none                     &none
+            >;
+        };
+
+       7 {
+            bindings = <
+                &kp F1  &msc SCRL_RIGHT   &mmv MOVE_Y(-200)     &msc SCRL_UP  &kp F5 &bt BT_SEL 5                  &kp F6  &kp F7  &kp F8  &kp F9  &mkp MB1
+                &none      &mmv MOVE_X(-200) &mmv MOVE_Y(200)    &mmv MOVE_X(200)    &none        &none                         &none   &none   &none   &kp JP_HASH   &none
+                &trans  &msc SCRL_LEFT   &trans           &msc SCRL_DOWN  &trans         &none                         &none        &none        &none        &none        &none
+                &none                                  &none         &none        &none             &none       &none        &none        &none                     &none
+            >;
+        };
+
+
+
+    };
+};
