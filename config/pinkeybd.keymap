@@ -169,7 +169,7 @@
      
         layer_2 {
             bindings = <
-            &none        &kp JP_LT      &kp JP_EQUAL   &kp JP_RT  &none    &kp ESC                             &none          &kp JP_PLUS     &none        &kp JP_SLASH  &mkp MB3
+            &none        &kp JP_LT      &kp JP_EQUAL   &kp JP_RT  &kp JP_PRCNT     &none                           &none          &kp JP_PLUS     &none        &kp JP_SLASH  &mkp MB3
             &none        &kp JP_LPAR    &kp JP_AT      &kp JP_RPAR   &kp MINUS               &kp LCTRL                           &kp JP_QMARK   &kp ENTER  &kp DOUBLE_QUOTES &kp LS(0x87)  &kp LS(0x1e)
             &none        &kp JP_LBRC    &none          &kp JP_RBRC   &none               &kp TAB                             &kp DELETE          &none           &none         &none         &none
                 &kp LSHIFT                             &mo 5             &kp SPACE           &kp LALT                &kp PSCRN   &kp RSHIFT      &kp ENTER    &none                          &kp RSHIFT
