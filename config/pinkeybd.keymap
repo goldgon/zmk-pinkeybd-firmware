@@ -156,11 +156,12 @@
         };
     
 
-        Lower_layer_1 {
+        layer_1 {
             bindings = <
-                &kp 0x38     &none      &kp UP     &none       &none   &kp PAUSE_BREAK                 &kp TAB          &kp UP          &kp N8        &kp N9         &mkp MB2
-                &kp JP_SEMI  &kp LEFT   &kp GRAVE  &kp GRAVE   &kp MINUS               &kp SCROLLLOCK                 &kp BACKSPACE  &kp SPACE       &kp TAB       &kp ENTER      &kp COMMA
-                &kp JP_COLON &none &none &none &none               &kp TAB                        &kp DELETE  &kp N1 &kp N2 &kp N3 &mt LCTRL PERIOD
+                &kp 0x38      &none      &kp UP     &none      &none      &none               &kp TAB        &kp UP     &none    &none      &mkp MB2
+                &kp JP_SEMI   &kp LEFT   &kp GRAVE  &kp GRAVE  &kp MINUS  &none               &kp BACKSPACE  &kp SPACE  &kp TAB  &kp ENTER  &kp COMMA
+                &kp JP_COLON  &none      &none      &none      &none      &none               &kp DELETE     &none      &none    &none      &mt LCTRL PERIOD
+                
                 &kp LSHIFT                              &none           &kp SPACE           &kp LALT            &kp PSCRN   &kp RSHIFT        &kp ENTER     &mo 4                &kp RCTRL
             >;  
         };
